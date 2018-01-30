@@ -3,9 +3,9 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-class App extends React.Component {
+class App extends React.Component {  
   render() {
-    return (
+    return (      
       <div>
         <Navbar history={this.props.history} />
         {this.props.children}

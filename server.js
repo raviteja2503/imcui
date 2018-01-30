@@ -24,6 +24,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.post('/api/contact', function(req, res, next) {
+  console.log("Req Obj::" + JSON.stringify(req, null, 2));  
+});
+
 
 var swig  = require('swig');
 var React = require('react');
