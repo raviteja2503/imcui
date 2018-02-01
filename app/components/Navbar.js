@@ -1,7 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-// import NavbarStore from '../stores/NavbarStore';
-// import NavbarActions from '../actions/NavbarActions';
 
 class Navbar extends React.Component {
   render() {
@@ -25,7 +23,8 @@ class Navbar extends React.Component {
             <li><Link to='/posts'>Posts</Link></li>
             <li><Link to='/events'>Events</Link></li>
             <li><Link to='/contact'>Contact</Link></li>
-            <li><Link to='/login'>Login</Link></li>
+            <li><Link to='/login'>Login/</Link></li>
+            <li><Link to='/signup'>Signup</Link></li>
             <li className='dropdown'>
               <a href='#' className='dropdown-toggle' data-toggle='dropdown'>DropDown <span className='caret'></span></a>
               <ul className='dropdown-menu'>
