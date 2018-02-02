@@ -20,13 +20,19 @@ class Login extends React.Component {
 
     onChange(state) {
         this.setState(state);
+        console.log("State", JSON.stringify(state, null, 2));
+        // if (this.state.btnValidationState) {
+        //     console.log("State of btnValidationState is:", this.state.btnValidationState);
+        //     $( ".target" ).hide();
+        // } else {
+        //     console.log("btnValidationState State is:", this.state.btnValidationState);
+        // }
     }
 
     handleSubmit(event) {
         event.preventDefault();
         var email = this.state.email.trim();
-        var password = this.state.password.trim();
-        
+        var password = this.state.password.trim();        
 
         if (!email) {
             LoginActions.invalidEmail();
@@ -75,7 +81,7 @@ class Login extends React.Component {
                                             />
                                             <span className='help-block'>{this.state.passwordHelpBlock}</span>
                                         </div>                                        
-                                        <button type='submit' className='btn btn btn-primary btn-block'>Sign In</button>
+                                        <button type='submit' className='btn btn btn-primary btn-block' {...this.state.btnValidationState}>Sign In</button>
                                         <div className="row">
                                             <p className="form-links">Don't Have an Account?
                                                 <a href="/signup">Sign Up</a>

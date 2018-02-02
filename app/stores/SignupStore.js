@@ -3,6 +3,7 @@ import SignupActions from '../actions/SignupActions';
 
 class signupStore {
   constructor() {
+    console.log(this.state);
     this.bindActions(SignupActions);
     this.firstName = '';
     this.lastName = '';
@@ -48,8 +49,14 @@ class signupStore {
 
   onUpdateMobile(event) {
     this.mobile = event.target.value;
-    this.mobileValidationState = '';
-    this.mobileHelpBlock = '';
+    console.log(this.mobile);
+    if(isNaN(this.mobile)) {
+      this.mobileValidationState = 'has-error';
+      this.mobileHelpBlock = 'Please enter Valid Mobile Number.';
+    } else {
+      this.mobileValidationState = '';
+      this.mobileHelpBlock = '';
+    }    
   }
 
   onUpdateEmail(event) {

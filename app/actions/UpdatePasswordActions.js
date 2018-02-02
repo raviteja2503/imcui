@@ -25,7 +25,7 @@ class UpdatePasswordActions {
 			type: 'PUT',			
 			url: '/ui/user/updatePassword',
 			data: {
-                'currentPassword': currentPassword,
+                'oldPassword': currentPassword,
                 'newPassword': newPassword
             },
 			success: function(data) {

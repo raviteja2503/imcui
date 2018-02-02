@@ -1,5 +1,6 @@
 import alt from '../alt';
 import LoginActions from '../actions/LoginActions';
+import {assign, contains} from 'underscore';
 
 class LoginStore {
   constructor() {
@@ -10,11 +11,11 @@ class LoginStore {
     this.passwordHelpBlock = '';
     this.emailValidationState = '';
     this.passwordValidationState = '';
+    this.btnValidationState = 'disabled';
   }
 
-  onValidateUserSuccess(successMessage) {
-    this.emailValidationState = 'has-success';
-    this.helpBlock = successMessage;
+  onValidateUserSuccess(data) {
+    assign(this, data[0]);
   }
 
   onValidateUserFail(errorMessage) {
@@ -24,6 +25,7 @@ class LoginStore {
 
   onUpdateEmail(event) {
     this.email = event.target.value;
+    console.log("Email::", event.target.value);
     this.emailValidationState = '';
     this.emailHelpBlock = '';
   }

@@ -44,6 +44,7 @@
     "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.7",
     "history": "^1.13.0",
+    "moment": "^2.20.1",
     "mongoose": "^4.2.5",
     "mongoose-unique-validator": "^2.0.0",
     "morgan": "^1.6.1",

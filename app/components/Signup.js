@@ -66,8 +66,7 @@ class Signup extends React.Component {
             SignupActions.passwordNotMatched();
             this.refs.repeatPasswordField.focus();
         }
-
-        if (firstName && lastName && mobile && email && password && repeatPassword) {
+        else if (firstName && lastName && mobile && email && password && repeatPassword) {
             console.log(firstName, lastName, mobile, email, password, repeatPassword);
             SignupActions.registerUser(firstName, lastName, mobile, email, password, repeatPassword);
         }

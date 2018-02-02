@@ -18,7 +18,6 @@ class LoginActions {
       password: password
     };
     console.log("Form Data::" + JSON.stringify(formData, null, 2)); 
-    alert("Form Data::" + JSON.stringify(formData, null, 2));   
 
     $.ajax({
 			type: 'POST',			
@@ -26,20 +25,41 @@ class LoginActions {
 			data: {
         'email': email,
         'password': password
-      },
-			success: function(data) {
-        console.log("Success Data Is ::" + JSON.stringify(data, null, 2));
-        alert("Success Data Is ::" + JSON.stringify(data, null, 2));
-        console.log(data.result);			
-        toastr.success(data.result);
-			},
-			error: function(data) {
-        console.log("Error Data Is ::" + JSON.stringify(data, null, 2));
-        alert("Error Data Is ::" + JSON.stringify(data, null, 2));
-        console.log(data.error);			
-        toastr.error(data.result);
-			}
-		});
+      }})
+        .done(data => {
+          this.actions.validateUserSuccess(data.result);
+          console.log("Success Data Is ::" + JSON.stringify(data.result, null, 2));
+      })
+      .fail(jqXhr => {
+        console.log("Get Posts Called and Fail ::", jqXhr);
+        this.actions.validateUserFail(jqXhr.responseJSON.result);
+      });
+
+    // $.ajax({
+		// 	type: 'POST',			
+		// 	url: '/ui/user/login',
+		// 	data: {
+    //     'email': email,
+    //     'password': password
+    //   },
+		// 	success: function(data) {
+    //     if (data.status == "Error") {
+    //       console.log("Error Data Is ::" + JSON.stringify(data, null, 2));
+    //       console.log(data.error);
+    //       toastr.error(data.error[0].error);
+    //     } else {
+    //       console.log("Success Data Is ::" + JSON.stringify(data, null, 2));
+    //       this.actions.validateUserSuccess(data.result);
+    //       console.log(data.result);			
+    //       toastr.success(data.result);
+    //     }        
+		// 	},
+		// 	error: function(data) {
+    //     console.log("Error Data Is ::" + JSON.stringify(data, null, 2));
+    //     console.log(data.error);			
+    //     toastr.error(data.result);
+		// 	}
+		// });
   }
 }
 

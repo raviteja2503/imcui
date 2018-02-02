@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+var moment = require('moment');
 
 import PostsStore from '../stores/PostsStore';
 import PostsActions from '../actions/PostsActions';
@@ -13,9 +14,7 @@ class Posts extends React.Component {
       }
     
       componentDidMount() {
-          console.log("componentDidMount");          
         PostsStore.listen(this.onChange);
-        console.log("Currnt State", this.state);
         PostsActions.getPosts();
       }
     
@@ -30,22 +29,42 @@ class Posts extends React.Component {
     render() {
         var postNodes = this.state.posts.map((post, index) => {
             return (
-            <div key={post.postId} className={index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5'}>
+            <div key={post.postId} className={index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1'}>
                 <div className='thumbnail fadeInUp animated'>
                     <div className='caption text-center'>
                         <ul className='list-inline'>
+                            <img className="card-img-top" src={"/img/home_bg.jpg"} alt="Post_image" />
                             <li><strong>PostName:</strong> {post.postName}</li>
-                            <li><strong>Post Content:</strong> {post.content}</li>
+                            <li><strong>Post Content:</strong> {post.content.split(" ").splice(0, 10).join(" ")}</li>
                             <li><strong>author:</strong> {post.author}</li>
                             <li><strong>category:</strong> {post.category}</li>
                             <li><strong>postType:</strong> {post.postType} </li>
                         </ul>
                         <h4>
-                        <Link to={'/posts/' + post.postId}><strong>{post.postName}</strong></Link>
+                            <Link to={'/posts/' + post.postId}><strong>{post.postName}</strong></Link>
                         </h4>
                     </div>
                 </div>
             </div>
+            );
+        });
+
+        var latestPosts = this.state.posts.map((post, index) => {
+            return (
+                <div className="col-lg-6 text-center" key={post.postId}>
+                    <div className="card"> <img className="card-img-top" src={"/img/home_bg.jpg"} alt="Post_image" />
+                        <div className="card-block">
+                            <h4 className="card-title">{post.postName}</h4>
+                            <p className="card-text">{post.content.split(" ").splice(0, 10).join(" ")}</p>
+                            <ul className="list-inline ">
+                                <li className="list-inline-item">
+                                    <p className="card-text"><b>Poted On:</b>{ moment(post.dateCreated).format("DD MMM YYYY") }</p>
+                                </li>
+                                <li className="list-inline-item"> <Link to={'/posts/' + post.postId}><a className={index % 2 === 0 ? 'btn btn-primary' : 'btn btn-danger'} >View Post</a></Link></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>            
             );
         });
     
@@ -56,24 +75,13 @@ class Posts extends React.Component {
                     <div className='row'>
                         {postNodes}
                     </div>
-                    <div className='row'>
-                        <div className='col-xs-6 col-sm-6 col-md-5 col-md-offset-1'>
-                            <div className='thumbnail fadeInUp animated'>
-                                <div className='caption text-center'>
-                                    <ul className='list-inline'>
-                                    <li><strong>PostName:</strong> Test Post</li>
-                                    <li><strong>Post Content:</strong> Make sure you have the appropriate dependencies installed and configured for your platform. You can find installation instructions for the dependencies for some common platforms in this page. </li>
-                                    <li><strong>author:</strong> Ravi</li>
-                                    <li><strong>category:</strong> IOT </li>
-                                    <li><strong>postType:</strong> Test </li>
-                                    </ul>
-                                    <h4>
-                                        <Link to={'/posts/'}><strong>Ravi</strong></Link>
-                                    </h4>
-                                </div>
+                    <div className="col-md-12">     
+                        <div className="row">
+                            <div className="posts-outline">
+                                {latestPosts}
                             </div>
-                        </div>
-                    </div>
+                        </div>  
+                    </div>            
                 </div>
             </div>
         );

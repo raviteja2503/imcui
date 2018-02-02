@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Posts from './components/Posts';
+import Post from './components/Post';
 import Events from './components/Events';
 import Forgotpassword from './components/ForgotPassword';
 import UpdatePassword from './components/UpdatePassword';
@@ -20,6 +21,7 @@ export default (
     <Route path='/login' component={Login} />
     <Route path='/signup' component={Signup} />
     <Route path='/posts' component={Posts} />
+    <Route path='/posts/:id' component={Post} />
     <Route path='/events' component={Events} />
     <Route path='/forgotpassword' component={Forgotpassword} />
     <Route path='/updatepassword' component={UpdatePassword} />
