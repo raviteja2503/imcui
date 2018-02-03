@@ -23,16 +23,24 @@ class signupStore {
     this.emailValidationState = '';
     this.passwordValidationState = '';
     this.repeatPasswordValidationState = '';
+    this.isSignup = 'false';
   }
 
-  onRegisterUserSuccess(successMessage) {
-    this.emailValidationState = 'has-success';
-    this.helpBlock = successMessage;
+  onRegisterUserSuccess(successState) {
+    if(successState == 'Success') {
+      this.isSignup = 'true';
+      this.emailValidationState = 'has-success';
+      this.emailHelpBlock = successState;      
+    }
+    console.log(successState);
+    
   }
 
-  onRegisterUserFail(errorMessage) {
-    this.emailValidationState = 'has-error';
-    this.helpBlock = errorMessage;
+  onRegisterUserFail(errorState) {
+    if(errorState == 'Error') {
+      this.emailValidationState = 'has-error';
+      this.emailHelpBlock = errorState;
+    }  
   }
 
   onUpdateFirstName(event) {

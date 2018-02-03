@@ -28,7 +28,15 @@ class LoginActions {
       }})
         .done(data => {
           this.actions.validateUserSuccess(data.result);
-          console.log("Success Data Is ::" + JSON.stringify(data.result, null, 2));
+          console.log("Success Data Is ::" + JSON.stringify(data, null, 2));
+          if (data.status == 'Error') {
+            toastr.error(data.result);
+          } else if (data.status == 'Success') {
+            toastr.success(data.result);
+          }
+          // if(this.state.userId) {
+          //   console.log("User Signed In");
+          // }
       })
       .fail(jqXhr => {
         console.log("Get Posts Called and Fail ::", jqXhr);

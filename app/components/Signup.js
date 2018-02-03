@@ -1,4 +1,9 @@
 import React  from 'react';
+import { Route, Redirect } from 'react-router';
+import { browserHistory } from 'react-router';
+
+import {withRouter} from 'react-router';
+
 
 import SignupStore from '../stores/SignupStore';
 import SignupActions from '../actions/SignupActions';
@@ -20,6 +25,16 @@ class Signup extends React.Component {
 
     onChange(state) {
         this.setState(state);
+        console.log(this.state.isSignup);
+        if(this.state.isSignup == 'true') {            
+            console.log("User SIgned Up Succesfully");
+            this.props.history.push({
+                pathname: '/activate',
+                state: {userId: this.state.userId}  
+            });
+        } else {
+            console.log("Nope Not Signed In");
+        }
     }
 
     handleSubmit(event) {
@@ -67,12 +82,13 @@ class Signup extends React.Component {
             this.refs.repeatPasswordField.focus();
         }
         else if (firstName && lastName && mobile && email && password && repeatPassword) {
-            console.log(firstName, lastName, mobile, email, password, repeatPassword);
+            // console.log(firstName, lastName, mobile, email, password, repeatPassword);
             SignupActions.registerUser(firstName, lastName, mobile, email, password, repeatPassword);
         }
-    }
+    }    
+
     render() {
-        return(
+        return(            
             <div className="content signup-bg">
                 <div className="container">
                     <div className="col-md-12">

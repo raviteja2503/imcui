@@ -16,6 +16,7 @@ class LoginStore {
 
   onValidateUserSuccess(data) {
     assign(this, data[0]);
+    console.log("Succefully Login In");
   }
 
   onValidateUserFail(errorMessage) {

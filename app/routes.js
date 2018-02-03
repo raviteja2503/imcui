@@ -12,6 +12,7 @@ import Post from './components/Post';
 import Events from './components/Events';
 import Forgotpassword from './components/ForgotPassword';
 import UpdatePassword from './components/UpdatePassword';
+import Activate from './components/Activate';
 
 export default (
   <Route component={App}>
@@ -25,5 +26,6 @@ export default (
     <Route path='/events' component={Events} />
     <Route path='/forgotpassword' component={Forgotpassword} />
     <Route path='/updatepassword' component={UpdatePassword} />
+    <Route path='/activate' component={Activate} />
   </Route>
 );

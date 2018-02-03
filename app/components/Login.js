@@ -20,7 +20,7 @@ class Login extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        console.log("State", JSON.stringify(state, null, 2));
+        console.log("user", this.state.userId);
         // if (this.state.btnValidationState) {
         //     console.log("State of btnValidationState is:", this.state.btnValidationState);
         //     $( ".target" ).hide();
@@ -81,7 +81,7 @@ class Login extends React.Component {
                                             />
                                             <span className='help-block'>{this.state.passwordHelpBlock}</span>
                                         </div>                                        
-                                        <button type='submit' className='btn btn btn-primary btn-block' {...this.state.btnValidationState}>Sign In</button>
+                                        <button type='submit' className='btn btn btn-primary btn-block'>Sign In</button>
                                         <div className="row">
                                             <p className="form-links">Don't Have an Account?
                                                 <a href="/signup">Sign Up</a>
