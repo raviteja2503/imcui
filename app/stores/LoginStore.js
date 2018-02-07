@@ -1,6 +1,6 @@
 import alt from '../alt';
 import LoginActions from '../actions/LoginActions';
-import {assign, contains} from 'underscore';
+import { assign, contains } from 'underscore';
 
 class LoginStore {
   constructor() {
@@ -16,7 +16,7 @@ class LoginStore {
 
   onValidateUserSuccess(data) {
     assign(this, data[0]);
-    console.log("Succefully Login In");
+    console.log(this);
   }
 
   onValidateUserFail(errorMessage) {

@@ -20,11 +20,19 @@ class Forgotpassword extends React.Component {
 
     onChange(state) {
         this.setState(state);
+        if (this.state.isTokenSetSuccess == 'true') {
+            this.props.history.push({
+                pathname: '/resetpassword',
+                state: { userId: this.state.userId }
+            });
+        } else {
+            console.log("Nope Not Setted");
+        }
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        var forgotEmail = this.state.forgotEmail.trim();        
+        var forgotEmail = this.state.forgotEmail.trim();
 
         if (!forgotEmail) {
             ForgotPasswordActions.invalidForgotEmail();
@@ -36,7 +44,7 @@ class Forgotpassword extends React.Component {
         }
     }
     render() {
-        return(
+        return (
             <div className="content">
                 <div className="container">
                     <div className="col-md-12">
@@ -47,22 +55,22 @@ class Forgotpassword extends React.Component {
                                         <h2 className="form-links text-center">Forgot password</h2>
                                         <div className={'form-group ' + this.state.forgotEmailValidationState}>
                                             <label className='control-label'>Email:</label>
-                                            <input 
+                                            <input
                                                 type='email'
                                                 placeholder='Email Address'
                                                 className='form-control'
                                                 ref='forgotEmailField'
                                                 value={this.state.forgotEmail}
-                                                onChange={ForgotPasswordActions.updateForgotEmail} 
+                                                onChange={ForgotPasswordActions.updateForgotEmail}
                                             />
                                             <span className='help-block'>{this.state.forgotEmailHelpBlock}</span>
-                                        </div>                                                                               
+                                        </div>
                                         <button type='submit' className='btn btn-special btn-block'>Forgot Password</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                    </div>       
+                    </div>
                 </div>
             </div>
         );

@@ -17,57 +17,47 @@ class LoginActions {
       email: email,
       password: password
     };
-    console.log("Form Data::" + JSON.stringify(formData, null, 2)); 
 
     $.ajax({
-			type: 'POST',			
-			url: '/ui/user/login',
-			data: {
+      type: 'POST',
+      url: '/ui/user/login',
+      data: {
         'email': email,
         'password': password
-      }})
-        .done(data => {
-          this.actions.validateUserSuccess(data.result);
-          console.log("Success Data Is ::" + JSON.stringify(data, null, 2));
-          if (data.status == 'Error') {
+      }
+    })
+      .done(data => {
+        console.log("Data From Server Is::" + " "+JSON.stringify(data, null, 2));
+        if (data.status == 'Error') {
+          if (data.result) {
             toastr.error(data.result);
-          } else if (data.status == 'Success') {
-            toastr.success(data.result);
+          } else if (data.error) {
+            var errorList = data.error;
+            var errors = [];
+            for (var i = 0; i < errorList.length; i++) {
+              var error = '';
+              error = errorList[i].error;
+              errors.push(error);
+            }
+            var finalErrors = errors.map((e, index) => {
+              toastr.error(e);
+            });
           }
-          // if(this.state.userId) {
-          //   console.log("User Signed In");
-          // }
+        } else if (data.status == 'Success') {
+          var result = data.result;
+          localStorage.setItem("user", result[0].userId);
+          this.actions.validateUserSuccess(data.result);          
+          console.log("user Id", result[0].userId);
+          toastr.success(data.result);
+        }
+        // if(this.state.userId) {
+        //   console.log("User Signed In");
+        // }
       })
       .fail(jqXhr => {
         console.log("Get Posts Called and Fail ::", jqXhr);
         this.actions.validateUserFail(jqXhr.responseJSON.result);
       });
-
-    // $.ajax({
-		// 	type: 'POST',			
-		// 	url: '/ui/user/login',
-		// 	data: {
-    //     'email': email,
-    //     'password': password
-    //   },
-		// 	success: function(data) {
-    //     if (data.status == "Error") {
-    //       console.log("Error Data Is ::" + JSON.stringify(data, null, 2));
-    //       console.log(data.error);
-    //       toastr.error(data.error[0].error);
-    //     } else {
-    //       console.log("Success Data Is ::" + JSON.stringify(data, null, 2));
-    //       this.actions.validateUserSuccess(data.result);
-    //       console.log(data.result);			
-    //       toastr.success(data.result);
-    //     }        
-		// 	},
-		// 	error: function(data) {
-    //     console.log("Error Data Is ::" + JSON.stringify(data, null, 2));
-    //     console.log(data.error);			
-    //     toastr.error(data.result);
-		// 	}
-		// });
   }
 }
 

@@ -3,7 +3,6 @@ import SignupActions from '../actions/SignupActions';
 
 class signupStore {
   constructor() {
-    console.log(this.state);
     this.bindActions(SignupActions);
     this.firstName = '';
     this.lastName = '';
@@ -27,20 +26,18 @@ class signupStore {
   }
 
   onRegisterUserSuccess(successState) {
-    if(successState == 'Success') {
+    if (successState == 'Success') {
       this.isSignup = 'true';
       this.emailValidationState = 'has-success';
-      this.emailHelpBlock = successState;      
+      this.emailHelpBlock = successState;
     }
-    console.log(successState);
-    
   }
 
   onRegisterUserFail(errorState) {
-    if(errorState == 'Error') {
+    if (errorState == 'Error') {
       this.emailValidationState = 'has-error';
       this.emailHelpBlock = errorState;
-    }  
+    }
   }
 
   onUpdateFirstName(event) {
@@ -57,14 +54,13 @@ class signupStore {
 
   onUpdateMobile(event) {
     this.mobile = event.target.value;
-    console.log(this.mobile);
-    if(isNaN(this.mobile)) {
+    if (isNaN(this.mobile)) {
       this.mobileValidationState = 'has-error';
       this.mobileHelpBlock = 'Please enter Valid Mobile Number.';
     } else {
       this.mobileValidationState = '';
       this.mobileHelpBlock = '';
-    }    
+    }
   }
 
   onUpdateEmail(event) {

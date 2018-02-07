@@ -14,27 +14,35 @@ class ForgotPasswordActions {
     var formData = {
       forgotEmail: forgotEmail
     };
-    console.log("Form Data::" + JSON.stringify(formData, null, 2)); 
 
     $.ajax({
-			type: 'PUT',			
-			url: '/ui/user/forgotPassword',
-			data: {
-            'femail': forgotEmail
-        }})
-        .done(data => {
-          if (data.status == 'Success') {
-            console.log("Success Data Is ::" + JSON.stringify(data, null, 2));
-            alert("Success Data Is ::" + JSON.stringify(data, null, 2));
-            console.log(data.result);			  
-            toastr.success(data.result);
-            this.actions.activateUserSuccess(data.result);
-          } else if (data.status == 'Error') {
-            console.log("Success Data Is ::" + JSON.stringify(data, null, 2));
-            var a = data.error;
-            console.log("Success Data Is ::" + JSON.stringify(a.error, null, 2));
-            toastr.error(data.error + " " + JSON.stringify(a.error));
+      type: 'PUT',
+      url: '/ui/user/forgotPassword',
+      data: {
+        'email': forgotEmail
+      }
+    })
+      .done(data => {
+        if (data.status == 'Success') {
+          toastr.success(data.result);
+          this.actions.forgotPasswordSuccess(data.result);
+        } else if (data.status == 'Error') {
+          if (data.message) {
+            toastr.error(data.result);
+          } else {
+            var errorList = data.error;
+            var errors = [];
+            for (var i = 0; i < errorList.length; i++) {
+              var error = '';
+              error = errorList[i].error;
+              errors.push(error);
+            }
+            var finalErrors = errors.map((e, index) => {
+              toastr.error(e);
+            });
+            this.actions.forgotPasswordFail(data.status);
           }
+        }
       })
       .fail(jqXhr => {
         console.log("Get Posts Called and Fail ::", jqXhr);

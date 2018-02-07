@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 
 import LoginStore from '../stores/LoginStore';
 import LoginActions from '../actions/LoginActions';
@@ -20,7 +20,8 @@ class Login extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        console.log("user", this.state.userId);
+        console.log("user from localStorage", localStorage.getItem("user"));
+
         // if (this.state.btnValidationState) {
         //     console.log("State of btnValidationState is:", this.state.btnValidationState);
         //     $( ".target" ).hide();
@@ -32,7 +33,7 @@ class Login extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         var email = this.state.email.trim();
-        var password = this.state.password.trim();        
+        var password = this.state.password.trim();
 
         if (!email) {
             LoginActions.invalidEmail();
@@ -42,15 +43,14 @@ class Login extends React.Component {
         if (!password) {
             LoginActions.invalidPassword();
             this.refs.passwordField.focus();
-        }       
+        }
 
         if (email && password) {
-            console.log(email, password);
             LoginActions.validateUser(email, password);
         }
     }
     render() {
-        return(
+        return (
             <div className="content">
                 <div className="container">
                     <div className="col-md-12">
@@ -61,18 +61,18 @@ class Login extends React.Component {
                                         <h2 className="form-links text-center">SignIn</h2>
                                         <div className={'form-group ' + this.state.emailValidationState}>
                                             <label className='control-label'>Email:</label>
-                                            <input 
+                                            <input
                                                 type='text'
                                                 className='form-control'
                                                 ref='emailField'
                                                 value={this.state.email}
-                                                onChange={LoginActions.updateEmail} 
+                                                onChange={LoginActions.updateEmail}
                                             />
                                             <span className='help-block'>{this.state.emailHelpBlock}</span>
                                         </div>
                                         <div className={'form-group ' + this.state.passwordValidationState}>
                                             <label className='control-label'>Password:</label>
-                                            <input 
+                                            <input
                                                 type='password'
                                                 className='form-control'
                                                 ref='passwordField'
@@ -80,7 +80,7 @@ class Login extends React.Component {
                                                 onChange={LoginActions.updatePassword}
                                             />
                                             <span className='help-block'>{this.state.passwordHelpBlock}</span>
-                                        </div>                                        
+                                        </div>
                                         <button type='submit' className='btn btn btn-primary btn-block'>Sign In</button>
                                         <div className="row">
                                             <p className="form-links">Don't Have an Account?
@@ -89,11 +89,11 @@ class Login extends React.Component {
                                             <p className="form-links">
                                                 <a href="/forgotpassword" onclick="fogotPassword()">Forgot Password?</a>
                                             </p>
-                                        </div> 
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-{/*                         <div className="col-md-6">
+                            {/*                         <div className="col-md-6">
                                 <div className="col-md-6">
                                     <div className="form-outline">
                                         <form className="form-signin">
@@ -111,7 +111,7 @@ class Login extends React.Component {
                                 </div>
         </div>  */}
                         </div>
-                    </div>       
+                    </div>
                 </div>
             </div>
         );

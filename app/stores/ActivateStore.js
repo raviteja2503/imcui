@@ -1,6 +1,6 @@
 import alt from '../alt';
 import ActivateActions from '../actions/ActivateActions';
-import {assign, contains} from 'underscore';
+import { assign, contains } from 'underscore';
 
 class ActivateStore {
   constructor() {
@@ -12,7 +12,6 @@ class ActivateStore {
   }
 
   onActivateUserSuccess(data) {
-    console.log("Succefully Activated", data);
     this.isActivated = 'true';
   }
 
@@ -23,7 +22,6 @@ class ActivateStore {
 
   onUpdateActivationCode(event) {
     this.activationCode = event.target.value;
-    console.log("activationCode::", event.target.value);
     this.activationCodeValidationState = '';
     this.activationCodeHelpBlock = '';
   }

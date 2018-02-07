@@ -34,7 +34,10 @@ gulp.task('vendor', function() {
     'bower_components/jquery/dist/jquery.js',
     'bower_components/bootstrap/dist/js/bootstrap.js',
     'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
-    'bower_components/toastr/toastr.js'
+    'bower_components/toastr/toastr.js',
+    'bower_components/spin/spin.min.js',
+    'bower_components/blockUi/blockUi.js',
+    'bower_components/services/services.js'
   ]).pipe(concat('vendor.js'))
     .pipe(gulpif(production, uglify({ mangle: false })))
     .pipe(gulp.dest('public/js'));
@@ -51,7 +54,7 @@ gulp.task('browserify-vendor', function() {
     .bundle()
     .pipe(source('vendor.bundle.js'))
     .pipe(buffer())
-    .pipe(gulpif(production, uglify({ mangle: false })))
+    .pipe(gulpif(production, uglify({ mangle: true })))
     .pipe(gulp.dest('public/js'));
 });
 

@@ -59,7 +59,10 @@ class Events extends React.Component {
                             {event.guests}
                         </div>
                         <hr />
-                        <div className="dashboard-card-footer text-center"> <button className="btn btn btn-outline-info">View Event</button></div>
+                        
+                        <div className="dashboard-card-footer text-center">
+                            <Link to={'/events/' + event.eventId}><button className="btn btn btn-outline-info" data-toggle="popover">View Event</button></Link>
+                        </div>
                     </div>
                 </div>            
             );

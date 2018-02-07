@@ -25,9 +25,7 @@ class Signup extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        console.log(this.state.isSignup);
-        if(this.state.isSignup == 'true') {            
-            console.log("User SIgned Up Succesfully");
+        if(this.state.isSignup == 'true') {   
             this.props.history.push({
                 pathname: '/activate',
                 state: {userId: this.state.userId}  
@@ -72,17 +70,18 @@ class Signup extends React.Component {
             this.refs.passwordField.focus();
         }
 
-        if (! (password == repeatPassword)) {
+        if (!repeatPassword) {
             SignupActions.invalidRepeatPassword();
             this.refs.repeatPasswordField.focus();
         }
 
-        if (!repeatPassword) {
+        if (! (password == repeatPassword)) {
             SignupActions.passwordNotMatched();
             this.refs.repeatPasswordField.focus();
         }
+
+        
         else if (firstName && lastName && mobile && email && password && repeatPassword) {
-            // console.log(firstName, lastName, mobile, email, password, repeatPassword);
             SignupActions.registerUser(firstName, lastName, mobile, email, password, repeatPassword);
         }
     }    

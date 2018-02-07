@@ -7,11 +7,12 @@ class ForgotPasswordStore {
     this.forgotEmail = '';
     this.forgotEmailHelpBlock = '';
     this.forgotEmailValidationState = '';
+    this.isTokenSetSuccess = 'false';
+
   }
 
-  onForgotPasswordSuccess(successMessage) {
-    this.forgotEmailValidationState = 'has-success';
-    this.forgotEmailHelpBlock = successMessage;
+  onForgotPasswordSuccess(successState) {
+    this.isTokenSetSuccess = 'true';
   }
 
   onForgotPasswordFail(errorMessage) {

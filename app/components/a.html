@@ -1,14 +1,35 @@
-<div className="col-lg-6 text-center">
-    <div className="card"> <img className="card-img-top" src="img/home-bg.jpg" alt="Card image cap">
-        <div className="card-block">
-            <h4 className="card-title">'+ response[i].postName +'</h4>
-            <p className="card-text">'+ response[i].content.split(" ").splice(0,15).join(" ") +'</p>
-            <ul className="list-inline ">
-                <li className="list-inline-item">
-                    <p className="card-text"><b>Poted On:</b>'+ moment(response[i].dateCreated).format("DD MMM YYYY") +'</p>
-                </li>
-                <li className="list-inline-item"> <a href="/samplePost" onclick="viewPost('+response[i].postId+')" className="btn btn-primary">View Post</a></li>
-            </ul>
+<section className="dashboard-content">
+    <div className="dashboard-card">
+        <div className="dashboard-card-title text-center">
+            <h3 className="Post-header" id="eventTitle"></h3>
+            <hr>
+        </div>
+        <div className="row col-lg-12">
+            <div className="col-lg-6">
+                <p className="event-subtitle text-left"><b>At:</b id="place">Stability Tech Labs</p>
+          </div>
+          <div className="col-lg-6">
+              <p className="event-subtitle text-muted text-right"><b>On:</b>
+                    <time id="time">15-10-2017</time>
+                </p>
+            </div>
+        </div>
+        <div className="col-lg-12 text-center">
+            <div className="dashboard-card-content">
+                <div className="row col-lg-12 text-justify">
+                    <p id="eventContent"> </p>
+                </div>
+            </div>
+        </div>
+        <div className="guests text-center">
+            <h4>Guests Of The Event</h4>
+            <img src="img/user.png" className="img-fluid rounded-circle" height="150px" width="150px">
+            <img src="img/user.png" className="img-fluid rounded-circle" height="150px" width="150px">
+        </div>
+        <hr>
+        <div className="dashboard-card-foot text-center">
+            <button className="btn btn btn-outline-info">I'm Interested</button>
+            <button type="button" className="btn btn-outline-info" data-toggle="popover">Share To A Friend</button>
         </div>
     </div>
-</div>
+</section>

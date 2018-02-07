@@ -14,21 +14,21 @@ class LoginActions {
     var formData = {
       activationCode: activationCode
     };
-    console.log("Form Data::" + JSON.stringify(formData, null, 2)); 
 
     $.ajax({
-			type: 'PUT',			
-			url: '/ui/user/activate',
-			data: {
+      type: 'PUT',
+      url: '/ui/user/activate',
+      data: {
         'activationCode': activationCode
-      }})
-        .done(data => {
-          if (data.status == 'Success') {
-            toastr.success(data.result);
-            this.actions.activateUserSuccess(data.result);
-          } else if (data.status == 'Error') {
-            toastr.error(data.result);
-          }
+      }
+    })
+      .done(data => {
+        if (data.status == 'Success') {
+          toastr.success(data.result);
+          this.actions.activateUserSuccess(data.result);
+        } else if (data.status == 'Error') {
+          toastr.error(data.result);
+        }
       })
       .fail(jqXhr => {
         console.log("Get Posts Called and Fail ::", jqXhr);
