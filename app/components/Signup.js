@@ -99,7 +99,7 @@ class Signup extends React.Component {
                                         <div className={'form-group ' + this.state.firstNameValidationState}>
                                             <label className='control-label'>First Name:</label>
                                             <input 
-                                                type='text'
+                                                type='email'
                                                 className='form-control'
                                                 ref='firstNameTextField'
                                                 value={this.state.firstName}

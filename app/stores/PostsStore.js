@@ -15,10 +15,6 @@ class PostsStore {
   onGetPostsFail(errorMessage) {
     toastr.error(errorMessage);
   }
-
-  onVoteFail(errorMessage) {
-    toastr.error(errorMessage);
-  }
 }
 
 export default alt.createStore(PostsStore);

@@ -1,5 +1,7 @@
 import alt from '../alt';
 
+var utils = require('../../utils').utils;
+
 class LoginActions {
   constructor() {
     this.generateActions(
@@ -17,6 +19,13 @@ class LoginActions {
       email: email,
       password: password
     };
+    var target = document.getElementById('app');
+    var spinner = new Spinner(opts).spin(target);
+
+    $.blockUI({
+      message: null,
+      css: { backgroundColor: '#fff', color: '#fff' }
+    });
 
     $.ajax({
       type: 'POST',
@@ -27,7 +36,8 @@ class LoginActions {
       }
     })
       .done(data => {
-        console.log("Data From Server Is::" + " "+JSON.stringify(data, null, 2));
+        spinner.stop();
+        $.unblockUI();
         if (data.status == 'Error') {
           if (data.result) {
             toastr.error(data.result);
@@ -45,18 +55,21 @@ class LoginActions {
           }
         } else if (data.status == 'Success') {
           var result = data.result;
-          localStorage.setItem("user", result[0].userId);
-          this.actions.validateUserSuccess(data.result);          
-          console.log("user Id", result[0].userId);
-          toastr.success(data.result);
+          utils.formatStorage('userId', 210);
+          localStorage.setItem("user", 210);
+          this.actions.validateUserSuccess(data.result);
+          toastr.success("Successfully Logged In");
         }
-        // if(this.state.userId) {
-        //   console.log("User Signed In");
-        // }
       })
       .fail(jqXhr => {
-        console.log("Get Posts Called and Fail ::", jqXhr);
-        this.actions.validateUserFail(jqXhr.responseJSON.result);
+        spinner.stop();
+        $.unblockUI();
+        utils.formatStorage('userId', 210);
+        localStorage.setItem("user", 210);
+        if (jqXhr) {
+          toastr.error("Error From Server Please try again");
+          this.actions.validateUserFail(jqXhr.responseJSON);
+        }
       });
   }
 }

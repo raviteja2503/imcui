@@ -29,7 +29,6 @@ class Posts extends React.Component {
     render() {
         console.log(this.state.posts);
         var postNodes = this.state.posts.map((post, index) => {
-            console.log(post);
             return (
             <div key={post.postId} className={index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1'}>
                 <div className='thumbnail fadeInUp animated'>

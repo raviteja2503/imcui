@@ -2,6 +2,7 @@ import React from 'react';
 
 import LoginStore from '../stores/LoginStore';
 import LoginActions from '../actions/LoginActions';
+var utils = require('../../utils').utils;
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,7 +21,12 @@ class Login extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        console.log("user from localStorage", localStorage.getItem("user"));
+        if (this.state.isLoggedIn) {
+            this.props.history.push({
+                pathname: '/dashboard',
+                state: { loginState: this.state }
+            });
+        }
 
         // if (this.state.btnValidationState) {
         //     console.log("State of btnValidationState is:", this.state.btnValidationState);
@@ -45,6 +51,13 @@ class Login extends React.Component {
             this.refs.passwordField.focus();
         }
 
+        if (email) {
+            if (!utils.isEmail(email)) {
+                LoginActions.invalidEmail();
+                this.refs.emailField.focus();
+            }
+        }
+
         if (email && password) {
             LoginActions.validateUser(email, password);
         }
@@ -62,7 +75,7 @@ class Login extends React.Component {
                                         <div className={'form-group ' + this.state.emailValidationState}>
                                             <label className='control-label'>Email:</label>
                                             <input
-                                                type='text'
+                                                type='email'
                                                 className='form-control'
                                                 ref='emailField'
                                                 value={this.state.email}

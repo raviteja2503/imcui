@@ -2,6 +2,7 @@ import React from 'react';
 
 import UpdatePasswordStore from '../stores/UpdatePasswordStore';
 import UpdatePasswordActions from '../actions/UpdatePasswordActions';
+var utils = require('../../utils').utils;
 
 class UpdatePassword extends React.Component {
     constructor(props) {
@@ -12,6 +13,15 @@ class UpdatePassword extends React.Component {
 
     componentDidMount() {
         UpdatePasswordStore.listen(this.onChange);
+        const aa = utils.getStorage('isLoggedIn');
+        this.state.isAuth = aa;
+        if(this.state.isAuth) {
+            console.log("Ath", this.state.isAuth);
+        } else {
+            console.log("Not Ath", this.state.isAuth);
+            toastr.warning("First You Need To Login");
+            this.props.history.push('/login');
+        }
     }
 
     componentWillUnmount() {
@@ -48,46 +58,62 @@ class UpdatePassword extends React.Component {
         }
     }
     render() {
-        return(
-            <div className="content">
-                <div className="container">
-                    <div className="col-md-12">
-                        <div className="row">
-                            <div className="col-md-10">
-                                <div className="form-outline">
-                                    <form onSubmit={this.handleSubmit.bind(this)} className="form-signup">
-                                        <h2 className="form-links text-center">Update password</h2>
-                                        <div className={'form-group ' + this.state.currenPasswordValidationState}>
-                                            <label className='control-label'>Current Password:</label>
-                                            <input 
-                                                type='password'
-                                                className='form-control'
-                                                ref='currentPasswordField'
-                                                value={this.state.currentPassword}
-                                                onChange={UpdatePasswordActions.updateCurrentPassword} 
-                                            />
-                                            <span className='help-block'>{this.state.currentPasswordHelpBlock}</span>
-                                        </div>
-                                        <div className={'form-group ' + this.state.newPasswordValidationState}>
-                                            <label className='control-label'>New Password:</label>
-                                            <input 
-                                                type='password'
-                                                className='form-control'
-                                                ref='newPasswordField'
-                                                value={this.state.newPassword}
-                                                onChange={UpdatePasswordActions.updateNewPassword}
-                                            />
-                                            <span className='help-block'>{this.state.newPasswordHelpBlock}</span>
-                                        </div>                                        
-                                        <button type='submit' className='btn btn-special btn-block'>Update Password</button>
-                                    </form>
+        if(this.state.isAuth) {
+            console.log("Ath", this.state.isAuth);
+            return(
+                <div className="content">
+                    <div className="container">
+                        <div className="col-md-12">
+                            <div className="row">
+                                <div className="col-md-10">
+                                    <div className="form-outline">
+                                        <form onSubmit={this.handleSubmit.bind(this)} className="form-signup">
+                                            <h2 className="form-links text-center">Update password</h2>
+                                            <div className={'form-group ' + this.state.currenPasswordValidationState}>
+                                                <label className='control-label'>Current Password:</label>
+                                                <input 
+                                                    type='password'
+                                                    className='form-control'
+                                                    ref='currentPasswordField'
+                                                    value={this.state.currentPassword}
+                                                    onChange={UpdatePasswordActions.updateCurrentPassword} 
+                                                />
+                                                <span className='help-block'>{this.state.currentPasswordHelpBlock}</span>
+                                            </div>
+                                            <div className={'form-group ' + this.state.newPasswordValidationState}>
+                                                <label className='control-label'>New Password:</label>
+                                                <input 
+                                                    type='password'
+                                                    className='form-control'
+                                                    ref='newPasswordField'
+                                                    value={this.state.newPassword}
+                                                    onChange={UpdatePasswordActions.updateNewPassword}
+                                                />
+                                                <span className='help-block'>{this.state.newPasswordHelpBlock}</span>
+                                            </div>                                        
+                                            <button type='submit' className='btn btn-special btn-block'>Update Password</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>       
+                        </div>       
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            console.log("Not Ath", this.state.isAuth);
+            return (
+                <div>
+                    <div id="loader-wrapper">
+                        <div id="loader"></div>
+    
+                        <div className="loader-section section-left"></div>
+                        <div className="loader-section section-right"></div>
+    
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

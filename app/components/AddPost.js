@@ -2,6 +2,7 @@ import React from 'react';
 
 import AddPostStore from '../stores/AddPostStore';
 import AddPostActions from '../actions/AddPostActions';
+var utils = require('../../utils').utils;
 
 class AddPost extends React.Component {
     constructor(props) {
@@ -12,6 +13,16 @@ class AddPost extends React.Component {
 
     componentDidMount() {
         AddPostStore.listen(this.onChange);
+        // const aa = utils.getStorage('isLoggedIn');
+        const aa = true;
+        this.state.isAuth = aa;
+        // if(this.state.isAuth) {
+        //     console.log("Ath", this.state.isAuth);
+        // } else {
+        //     console.log("Not Ath", this.state.isAuth);
+        //     toastr.warning("First You Need To Login"); 
+        //     this.props.history.push('/login');
+        // }
     }
 
     componentWillUnmount() {
@@ -62,79 +73,95 @@ class AddPost extends React.Component {
         }
     }
     render() {
-        return (
-            <div className='content'>
-                <div className='row'>
-                    <div className='col-sm-8 col-sm-offset-2' id='contactForm'>
-                        <div className='panel panel-default'>
-                            <div className='panel-heading'>Add Post</div>
-                            <div className='panel-body'>
-                                <form onSubmit={this.handleSubmit.bind(this)}>
-                                    <div className={'form-group ' + this.state.postNameValidationState}>
-                                        <label className='control-label'>Post Name:</label>
-                                        <input 
-                                            type='text' 
-                                            className='form-control' 
-                                            ref='postNameFeild' 
-                                            value={this.state.postName}
-                                            onChange={AddPostActions.updatePostName} 
-                                        />
-                                        <span className='help-block'>{this.state.postNameHelpBlock}</span>
-                                    </div>
-                                    <div className={'form-group ' + this.state.authorValidationState}>
-                                        <label className='control-label'>Author:</label>
-                                        <input 
-                                            type='text'
-                                            className='form-control'
-                                            ref='authorField'
-                                            value={this.state.author}
-                                            onChange={AddPostActions.updateAuthor}
-                                        />
-                                        <span className='help-block'>{this.state.authorHelpBlock}</span>
-                                    </div>
-                                    <div className={'form-group ' + this.state.categoryValidationState}>
-                                        <label className='control-label'>Category:</label>
-                                        <input 
-                                            type='text' 
-                                            className='form-control' 
-                                            ref='categoryFeild' 
-                                            value={this.state.category}
-                                            onChange={AddPostActions.updateCategory} 
-                                        />
-                                        <span className='help-block'>{this.state.categoryHelpBlock}</span>
-                                    </div>
-                                    <div className={'form-group ' + this.state.contentValidationState}>
-                                        <label className='control-label'>Content:</label>
-                                        <input 
-                                            type='text' 
-                                            className='form-control' 
-                                            ref='contentField' 
-                                            value={this.state.content}
-                                            onChange={AddPostActions.updateContent} 
-                                        />
-                                        <span className='help-block'>{this.state.contentHelpBlock}</span>
-                                    </div>
-                                    <div className={'form-group ' + this.state.postTypeValidationState}>
-                                        <label className='control-label'>Post Type:</label>
-                                        <input 
-                                            type='text' 
-                                            className='form-control' 
-                                            ref='postTypeField' 
-                                            value={this.state.postType}
-                                            onChange={AddPostActions.updatePostType} 
-                                        />
-                                        <span className='help-block'>{this.state.postTypeHelpBlock}</span>
-                                    </div>
-                                    <div className="row text-center">
-                                        <button type='submit' className='btn btn-primary'>Add Post</button>
-                                    </div>                                    
-                                </form>
+{/*        if(this.state.isAuth) {
+console.log("Ath", this.state.isAuth); */}
+            return(
+                <div className='content'>
+                    <div className='row'>
+                        <div className='col-sm-8 col-sm-offset-2' id='contactForm'>
+                            <div className='panel panel-default'>
+                                <div className='panel-heading'>Add Post</div>
+                                <div className='panel-body'>
+                                    <form onSubmit={this.handleSubmit.bind(this)}>
+                                        <div className={'form-group ' + this.state.postNameValidationState}>
+                                            <label className='control-label'>Post Name:</label>
+                                            <input 
+                                                type='text' 
+                                                className='form-control' 
+                                                ref='postNameFeild' 
+                                                value={this.state.postName}
+                                                onChange={AddPostActions.updatePostName} 
+                                            />
+                                            <span className='help-block'>{this.state.postNameHelpBlock}</span>
+                                        </div>
+                                        <div className={'form-group ' + this.state.authorValidationState}>
+                                            <label className='control-label'>Author:</label>
+                                            <input 
+                                                type='text'
+                                                className='form-control'
+                                                ref='authorField'
+                                                value={this.state.author}
+                                                onChange={AddPostActions.updateAuthor}
+                                            />
+                                            <span className='help-block'>{this.state.authorHelpBlock}</span>
+                                        </div>
+                                        <div className={'form-group ' + this.state.categoryValidationState}>
+                                            <label className='control-label'>Category:</label>
+                                            <input 
+                                                type='text' 
+                                                className='form-control' 
+                                                ref='categoryFeild' 
+                                                value={this.state.category}
+                                                onChange={AddPostActions.updateCategory} 
+                                            />
+                                            <span className='help-block'>{this.state.categoryHelpBlock}</span>
+                                        </div>
+                                        <div className={'form-group ' + this.state.contentValidationState}>
+                                            <label className='control-label'>Content:</label>
+                                            <input 
+                                                type='text' 
+                                                className='form-control' 
+                                                ref='contentField' 
+                                                value={this.state.content}
+                                                onChange={AddPostActions.updateContent} 
+                                            />
+                                            <span className='help-block'>{this.state.contentHelpBlock}</span>
+                                        </div>
+                                        <div className={'form-group ' + this.state.postTypeValidationState}>
+                                            <label className='control-label'>Post Type:</label>
+                                            <input 
+                                                type='text' 
+                                                className='form-control' 
+                                                ref='postTypeField' 
+                                                value={this.state.postType}
+                                                onChange={AddPostActions.updatePostType} 
+                                            />
+                                            <span className='help-block'>{this.state.postTypeHelpBlock}</span>
+                                        </div>
+                                        <div className="row text-center">
+                                            <button type='submit' className='btn btn-primary'>Add Post</button>
+                                        </div>                                    
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+{/*}        } else {
+            console.log("Not Ath", this.state.isAuth);
+            return (
+                <div>
+                    <div id="loader-wrapper">
+                        <div id="loader"></div>
+    
+                        <div className="loader-section section-left"></div>
+                        <div className="loader-section section-right"></div>
+    
+                    </div>
+                </div>
+            );
+        }     */}  
     }
 }
 

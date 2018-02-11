@@ -1,6 +1,7 @@
 import alt from '../alt';
 import LoginActions from '../actions/LoginActions';
 import { assign, contains } from 'underscore';
+var utils = require('../../utils').utils;
 
 class LoginStore {
   constructor() {
@@ -12,9 +13,12 @@ class LoginStore {
     this.emailValidationState = '';
     this.passwordValidationState = '';
     this.btnValidationState = 'disabled';
+    this.isLoggedIn = false;
   }
 
   onValidateUserSuccess(data) {
+    this.isLoggedIn = !(this.isLoggedIn);
+    utils.formatStorage('isLoggedIn', this.isLoggedIn);
     assign(this, data[0]);
     console.log(this);
   }
@@ -26,7 +30,7 @@ class LoginStore {
 
   onUpdateEmail(event) {
     this.email = event.target.value;
-    console.log("Email::", event.target.value);
+    // console.log("Email::", event.target.value);
     this.emailValidationState = '';
     this.emailHelpBlock = '';
   }
@@ -39,7 +43,7 @@ class LoginStore {
 
   onInvalidEmail() {
     this.emailValidationState = 'has-error';
-    this.emailHelpBlock = 'Please enter Your Email Address.';
+    this.emailHelpBlock = 'Please enter Valid Email Address.';
   }
 
   onInvalidPassword() {

@@ -21,7 +21,7 @@ class Event extends React.Component {
         }(document, 'script', 'facebook-jssdk'));
 
         $('[data-toggle="popover"]').popover({
-            placement: 'right',
+            placement: 'top',
             html: true,
             content: '<div class="media"><ul class="list-inline text-center"> <li class="list-inline-item">  <div class="fb-share-button" data-href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmaxcdn.bootstrapcdn.com%2Fbootstrap%2F4.0.0%2Fcss%2Fbootstrap.css&amp;src=sdkpreparse">Share</a></div> </li><li class="list-inline-item"> <a href="#"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-instagram fa-stack-1x fa-inverse"></i> </span> </a> </li><li class="list-inline-item"> <a href="#"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i> </span> </a> </li><li class="list-inline-item"> <a href="#"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i> </span> </a> </li></ul></div>'
         });
