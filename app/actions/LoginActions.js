@@ -64,8 +64,6 @@ class LoginActions {
       .fail(jqXhr => {
         spinner.stop();
         $.unblockUI();
-        utils.formatStorage('userId', 210);
-        localStorage.setItem("user", 210);
         if (jqXhr) {
           toastr.error("Error From Server Please try again");
           this.actions.validateUserFail(jqXhr.responseJSON);

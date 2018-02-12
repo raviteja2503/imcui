@@ -1,6 +1,7 @@
 import React from 'react';
 import EventStore from '../stores/EventStore';
 import EventActions from '../actions/EventActions';
+import Navbar from './Navbar';
 var moment = require('moment');
 
 class Event extends React.Component {
@@ -58,42 +59,45 @@ class Event extends React.Component {
     render() {
         console.log("State", this.state);
         return (
-            <div className='content'>
-                <section className="dashboard-content">
-                    <div className="dashboard-card">
-                        <div className="dashboard-card-title text-center">
-                            <h3 className="Post-header"> {this.state.eventName} </h3>
-                            <hr />
-                        </div>
-                        <div className="row col-lg-12">
-                            <div className="col-lg-6">
-                                <p className="event-subtitle text-left"><b>At:</b>{this.state.place}</p>
+            <div>
+                <Navbar />
+                <div className='content'>
+                    <section className="dashboard-content">
+                        <div className="dashboard-card">
+                            <div className="dashboard-card-title text-center">
+                                <h3 className="Post-header"> {this.state.eventName} </h3>
+                                <hr />
                             </div>
-                            <div className="col-lg-6">
-                                <p className="event-subtitle text-muted text-right"><b>On:</b>
-                                    <time>{this.state.time}</time>
-                                </p>
-                            </div>
-                        </div>
-                        <div className="col-lg-12 text-center">
-                            <div className="dashboard-card-content">
-                                <div className="row col-lg-12 text-justify">
-                                    <p> {this.state.description} </p>
+                            <div className="row col-lg-12">
+                                <div className="col-lg-6">
+                                    <p className="event-subtitle text-left"><b>At:</b>{this.state.place}</p>
+                                </div>
+                                <div className="col-lg-6">
+                                    <p className="event-subtitle text-muted text-right"><b>On:</b>
+                                        <time>{this.state.time}</time>
+                                    </p>
                                 </div>
                             </div>
+                            <div className="col-lg-12 text-center">
+                                <div className="dashboard-card-content">
+                                    <div className="row col-lg-12 text-justify">
+                                        <p> {this.state.description} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="guests text-center">
+                                <h4>Guests Of The Event</h4>
+                                <img src={"/img/user.png"} className="img-fluid rounded-circle" height="150px" width="150px" />
+                                <img src={"/img/user.png"} className="img-fluid rounded-circle" height="150px" width="150px" />
+                            </div>
+                            <hr />
+                            <div className="event-footer text-center">
+                                <button className="btn btn btn-outline-info event-footer">I'm Interested</button>
+                                <button type="button" className="btn btn-outline-info" data-toggle="popover">Share To A Friend</button>
+                            </div>
                         </div>
-                        <div className="guests text-center">
-                            <h4>Guests Of The Event</h4>
-                            <img src={"/img/user.png"} className="img-fluid rounded-circle" height="150px" width="150px" />
-                            <img src={"/img/user.png"} className="img-fluid rounded-circle" height="150px" width="150px" />
-                        </div>
-                        <hr />
-                        <div className="event-footer text-center">
-                            <button className="btn btn btn-outline-info event-footer">I'm Interested</button>
-                            <button type="button" className="btn btn-outline-info" data-toggle="popover">Share To A Friend</button>
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
         );
     }

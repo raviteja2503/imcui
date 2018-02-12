@@ -1,5 +1,6 @@
 import alt from '../alt';
 import AddEventStore from '../stores/AddEventStore';
+var utils = require('../../utils').utils;
 
 class AddEventActions {
     constructor() {
@@ -20,15 +21,6 @@ class AddEventActions {
     }
 
     addEvent(eventName, description, place, time, guests) {
-        var formData = {
-            eventName: eventName,
-            description: description,
-            place: place,
-            time: time,
-            guests: guests
-        };
-        console.log("Form Data::" + JSON.stringify(formData, null, 2));
-
         var target = document.getElementById('app');
         var spinner = new Spinner(opts).spin(target);
 
@@ -45,7 +37,7 @@ class AddEventActions {
                 place: place,
                 time: time,
                 guests: guests,
-                userId: localStorage.getItem("user")
+                userId: utils.getStorage('userId')
             }
         })
             .done((data) => {

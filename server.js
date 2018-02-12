@@ -33,8 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 var remoteServer = {
-    host: 'localhost',
-    port: 5050
+    host: 'https://iotmentorclub.herokuapp.com',
+    port: ''
 };
 
 app.use(function (req, res, next) {

@@ -16,7 +16,7 @@ class EventsActions {
         this.actions.getEventsSuccess(data.result);
       })
       .fail(jqXhr => {
-        onsole.log("Get Posts Called and Fail ::", jqXhr);
+        console.log("Get Posts Called and Fail ::", jqXhr);
         this.actions.getEventsFail(jqXhr.responseJSON.result);
       });
 

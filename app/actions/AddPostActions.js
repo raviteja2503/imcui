@@ -1,5 +1,7 @@
 import alt from '../alt';
 import AddPostStore from '../stores/AddPostStore';
+var utils = require('../../utils').utils;
+
 
 class AddPostActions {
   constructor() {
@@ -19,16 +21,14 @@ class AddPostActions {
     );
   }
 
-  AddPost(postName, author , category , content , postType) {
-    var formData = {
-      postName: postName,
-      author: author,
-      category: category,
-      content: content,
-      postType: postType
-    };
-    console.log("Form Data::" + JSON.stringify(formData, null, 2));
+  AddPost(postName, author, category, content, postType) {
+    var target = document.getElementById('app');
+    var spinner = new Spinner(opts).spin(target);
 
+    $.blockUI({
+      message: null,
+      css: { backgroundColor: '#fff', color: '#fff' }
+    });
     $.ajax({
       type: 'POST',
       url: '/ui/post',
@@ -38,15 +38,17 @@ class AddPostActions {
         category: category,
         content: content,
         postType: postType,
-        postOwner: localStorage.getItem("user")
+        postOwner: utils.getStorage('userId')
       }
     })
       .done((data) => {
+        spinner.stop();
+        $.unblockUI();
         if (data.status == 'Error') {
           if (data.result) {
             toastr.error(data.result);
             this.actions.addPostFail(data);
-          } else if (data.error) {            
+          } else if (data.error) {
             var errorList = data.error;
             var errors = [];
             for (var i = 0; i < errorList.length; i++) {
@@ -62,12 +64,14 @@ class AddPostActions {
         } else if (data.status == 'Success') {
           var result = data.result;
           toastr.success(data.result);
-          console.log(JSON.stringify(data,null,2));
-          console.log(" State From Post Actions" ,this.state);
+          console.log(JSON.stringify(data, null, 2));
+          console.log(" State From Post Actions", this.state);
           this.actions.addPostSuccess(data.message);
-        }        
+        }
       })
       .fail((jqXhr) => {
+        spinner.stop();
+        $.unblockUI();
         console.log(jqXhr.responseJSON.message);
         this.actions.addPostFail(jqXhr.responseJSON.message);
       });

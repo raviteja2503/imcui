@@ -2,6 +2,7 @@ import React from 'react';
 
 import AddEventStore from '../stores/AddEventStore';
 import AddEventActions from '../actions/AddEventActions';
+import Navbar from './Navbar';
 var utils = require('../../utils').utils;
 
 class AddEvent extends React.Component {
@@ -15,6 +16,7 @@ class AddEvent extends React.Component {
         AddEventStore.listen(this.onChange);
         const aa = utils.getStorage('isLoggedIn');
         this.state.isAuth = aa;
+        this.setState(this.state);
         if(this.state.isAuth) {
             console.log("Ath", this.state.isAuth);
         } else {
@@ -75,72 +77,75 @@ class AddEvent extends React.Component {
         if(this.state.isAuth) {
             console.log("Ath", this.state.isAuth);
             return (
-                <div className='content'>
-                    <div className='row'>
-                        <div className='col-sm-8 col-sm-offset-2' id='contactForm'>
-                            <div className='panel panel-default'>
-                                <div className='panel-heading'>Add Event</div>
-                                <div className='panel-body'>
-                                    <form onSubmit={this.handleSubmit.bind(this)}>
-                                        <div className={'form-group ' + this.state.eventNameValidationState}>
-                                            <label className='control-label'>Event Name:</label>
-                                            <input
-                                                type='text'
-                                                className='form-control'
-                                                ref='eventNameFeild'
-                                                value={this.state.eventName}
-                                                onChange={AddEventActions.updateEventName}
-                                            />
-                                            <span className='help-block'>{this.state.eventNameHelpBlock}</span>
-                                        </div>
-                                        <div className={'form-group ' + this.state.descriptionValidationState}>
-                                            <label className='control-label'>description:</label>
-                                            <input
-                                                type='text'
-                                                className='form-control'
-                                                ref='descriptionField'
-                                                value={this.state.description}
-                                                onChange={AddEventActions.updateDescription}
-                                            />
-                                            <span className='help-block'>{this.state.descriptionHelpBlock}</span>
-                                        </div>
-                                        <div className={'form-group ' + this.state.placeValidationState}>
-                                            <label className='control-label'>place:</label>
-                                            <input
-                                                type='text'
-                                                className='form-control'
-                                                ref='placeFeild'
-                                                value={this.state.place}
-                                                onChange={AddEventActions.updatePlace}
-                                            />
-                                            <span className='help-block'>{this.state.placeHelpBlock}</span>
-                                        </div>
-                                        <div className={'form-group ' + this.state.timeValidationState}>
-                                            <label className='control-label'>Time:</label>
-                                            <input
-                                                type='text'
-                                                className='form-control'
-                                                ref='timeField'
-                                                value={this.state.time}
-                                                onChange={AddEventActions.updateTime}
-                                            />
-                                            <span className='help-block'>{this.state.timeHelpBlock}</span>
-                                        </div>
-                                        <div className={'form-group ' + this.state.guestsValidationState}>
-                                            <label className='control-label'>Guests Of The Event:</label>
-                                            <input
-                                                type='text'
-                                                className='form-control'
-                                                ref='guestsField'
-                                                value={this.state.guests}
-                                                onChange={AddEventActions.updateGuests}
-                                            />
-                                            <span className='help-block'>{this.state.guestsHelpBlock}</span>
-                                        </div>
-                                        <div className="row text-center">
-                                            <button type='submit' className='btn btn-primary'>Add Event</button>
-                                        </div>
-                                    </form>
+                <div>
+                    <Navbar />
+                    <div className='content'>
+                        <div className='row'>
+                            <div className='col-sm-8 col-sm-offset-2' id='contactForm'>
+                                <div className='panel panel-default'>
+                                    <div className='panel-heading'>Add Event</div>
+                                    <div className='panel-body'>
+                                        <form onSubmit={this.handleSubmit.bind(this)}>
+                                            <div className={'form-group ' + this.state.eventNameValidationState}>
+                                                <label className='control-label'>Event Name:</label>
+                                                <input
+                                                    type='text'
+                                                    className='form-control'
+                                                    ref='eventNameFeild'
+                                                    value={this.state.eventName}
+                                                    onChange={AddEventActions.updateEventName}
+                                                />
+                                                <span className='help-block'>{this.state.eventNameHelpBlock}</span>
+                                            </div>
+                                            <div className={'form-group ' + this.state.descriptionValidationState}>
+                                                <label className='control-label'>description:</label>
+                                                <input
+                                                    type='text'
+                                                    className='form-control'
+                                                    ref='descriptionField'
+                                                    value={this.state.description}
+                                                    onChange={AddEventActions.updateDescription}
+                                                />
+                                                <span className='help-block'>{this.state.descriptionHelpBlock}</span>
+                                            </div>
+                                            <div className={'form-group ' + this.state.placeValidationState}>
+                                                <label className='control-label'>place:</label>
+                                                <input
+                                                    type='text'
+                                                    className='form-control'
+                                                    ref='placeFeild'
+                                                    value={this.state.place}
+                                                    onChange={AddEventActions.updatePlace}
+                                                />
+                                                <span className='help-block'>{this.state.placeHelpBlock}</span>
+                                            </div>
+                                            <div className={'form-group ' + this.state.timeValidationState}>
+                                                <label className='control-label'>Time:</label>
+                                                <input
+                                                    type='text'
+                                                    className='form-control'
+                                                    ref='timeField'
+                                                    value={this.state.time}
+                                                    onChange={AddEventActions.updateTime}
+                                                />
+                                                <span className='help-block'>{this.state.timeHelpBlock}</span>
+                                            </div>
+                                            <div className={'form-group ' + this.state.guestsValidationState}>
+                                                <label className='control-label'>Guests Of The Event:</label>
+                                                <input
+                                                    type='text'
+                                                    className='form-control'
+                                                    ref='guestsField'
+                                                    value={this.state.guests}
+                                                    onChange={AddEventActions.updateGuests}
+                                                />
+                                                <span className='help-block'>{this.state.guestsHelpBlock}</span>
+                                            </div>
+                                            <div className="row text-center">
+                                                <button type='submit' className='btn btn-primary'>Add Event</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -151,6 +156,7 @@ class AddEvent extends React.Component {
             console.log("Not Ath", this.state.isAuth);
             return (
                 <div>
+                    <Navbar/>
                     <div id="loader-wrapper">
                         <div id="loader"></div>
     
